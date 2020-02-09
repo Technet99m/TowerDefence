@@ -18,13 +18,13 @@ public class BulletController : MonoBehaviour
         var tmp = GetComponent<SpriteRenderer>();
         tmp.color = ColorConverter.ToColor(color);
         tmp.sprite = sprites[(int)shape];
-        transform.up = transform.parent.right;
+        transform.right = transform.parent.right;
         transform.parent = null;
     }
 
     private void Update()
     {
-        transform.Translate(Vector3.up * speed * Time.deltaTime); ;
+        transform.Translate(Vector3.right * speed * Time.deltaTime); ;
     }
 
     private void OnTriggerEnter2D(Collider2D coll)

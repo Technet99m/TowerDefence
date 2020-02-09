@@ -9,7 +9,12 @@ public enum Shapes
     Circle,
     Hexagon
 }
-
+public enum Targeting
+{
+    Weakest,
+    Strongest,
+    Nearest
+}
 public enum Colors
 {
     White,

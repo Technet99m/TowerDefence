@@ -11,8 +11,8 @@ public class TowerSetupController : MonoBehaviour
     {
         sr = GetComponent<SpriteRenderer>();
         obstacleCount = 0;
-        var tmp =  GetComponent<TowerDataHolder>();
-        transform.GetChild(1).localScale = new Vector3(tmp.data.Range, tmp.data.Range, 1);
+        var tmp =  GetComponent<TowerData>();
+        transform.GetChild(1).localScale = new Vector3(tmp.Range, tmp.Range, 1);
     }
     private void Update()
     {
@@ -28,7 +28,7 @@ public class TowerSetupController : MonoBehaviour
     }
     void Set()
     {
-        sr.color = ColorConverter.ToColor(GetComponent<TowerDataHolder>().data.Color);
+        sr.color = ColorConverter.ToColor(GetComponent<TowerData>().Color);
         transform.GetChild(1).localScale = Vector3.zero;
         GetComponent<TowerAim>().enabled = true;
         this.enabled = false;
