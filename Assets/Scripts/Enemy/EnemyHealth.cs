@@ -11,10 +11,19 @@ public class EnemyHealth : MonoBehaviour
     {
         dataHolder = GetComponent<EnemyDataHolder>();
     }
-
     private void OnEnable()
     {
         if(dataHolder!=null)
             health = dataHolder.data.Health;
+    }
+    public void GetDamage(float damage)
+    {
+        health -= damage;
+        if (health < 0)
+            Die();
+    }
+    void Die()
+    {
+
     }
 }

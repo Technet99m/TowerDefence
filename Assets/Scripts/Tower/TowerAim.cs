@@ -5,11 +5,9 @@ using UnityEngine;
 public class TowerAim : MonoBehaviour
 {
     public Targeting aimType;
-
     TowerDataHolder dataHolder;
-
     [SerializeField] Transform target;
-
+    public bool smart;
     private void Start()
     {
         dataHolder = GetComponent<TowerDataHolder>();
@@ -18,7 +16,13 @@ public class TowerAim : MonoBehaviour
     private void FixedUpdate()
     {
         if (target)
-            transform.right = target.position - transform.position;
+        {
+            if (smart)
+                transform.right = ;
+            else
+                transform.right = target.position - transform.position;
+        }
+            
         else
             transform.right = Vector3.right;
     }

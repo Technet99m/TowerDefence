@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum Shapes
 {
-    Rectangle,
+    Rectangle = 0,
     Triangle,
     Circle,
     Hexagon
