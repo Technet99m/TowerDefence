@@ -5,28 +5,33 @@ using UnityEngine;
 public class EnemyMovementComponent : MonoBehaviour
 {
     Vector3 target;
-
+    EnemyDataHolder dataHolder;
     public Vector3 direction
     { 
         get {
             return (target - transform.position).normalized;
         } 
     }
-    public float speed;
     int currentPoint;
 
-    public void OnStartMoving()
+    private void Awake()
     {
+        dataHolder = GetComponent<EnemyDataHolder>();
+    }
+    private void OnEnable()
+    {
+        if (EnemyPath.points == null)
+            return;
         transform.position = EnemyPath.GetFirstPoint();
         target = EnemyPath.GetNextPoint(0);
         currentPoint = 1;
     }
 
-    void Update()
+    private void Update()
     {
         float diff;
         Vector3 tmp = transform.position;
-        transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, target, dataHolder.data.Speed * Time.deltaTime);
         diff = Vector3.Distance(tmp, transform.position);
         if (diff < float.Epsilon)
         {
