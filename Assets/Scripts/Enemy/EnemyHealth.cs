@@ -5,17 +5,16 @@ using UnityEngine;
 public class EnemyHealth : MonoBehaviour
 {
     EnemyDataHolder dataHolder;
-    float health;
+    public float health;
 
     private void Start()
     {
         dataHolder = GetComponent<EnemyDataHolder>();
-        
     }
 
     private void OnEnable()
     {
         if(dataHolder!=null)
-            health = health = dataHolder.data.Health;
+            health = dataHolder.data.Health;
     }
 }

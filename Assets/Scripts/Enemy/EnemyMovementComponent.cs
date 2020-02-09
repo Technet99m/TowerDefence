@@ -13,6 +13,7 @@ public class EnemyMovementComponent : MonoBehaviour
         } 
     }
     int currentPoint;
+    public float distance;
 
     private void Awake()
     {
@@ -33,6 +34,7 @@ public class EnemyMovementComponent : MonoBehaviour
         Vector3 tmp = transform.position;
         transform.position = Vector3.MoveTowards(transform.position, target, dataHolder.data.Speed * Time.deltaTime);
         diff = Vector3.Distance(tmp, transform.position);
+        distance += diff;
         if (diff < float.Epsilon)
         {
             target = EnemyPath.GetNextPoint(currentPoint);
