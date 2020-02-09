@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d736ecc078f98f4a839600bb4e65a57, type: 3}
   m_Name: Circle
   m_EditorClassIdentifier: 
-  range: 3
-  damage: 2
+  range: 6
+  damage: 30
   reload: 1
-  color: 0
+  bulletSpeed: 6
+  color: 3
   shape: 2
   sprite: {fileID: 21300000, guid: 541183bb617d60945adae3687910e651, type: 3}

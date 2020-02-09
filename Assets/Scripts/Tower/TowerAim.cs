@@ -7,26 +7,27 @@ public class TowerAim : MonoBehaviour
     public Targeting aimType;
     TowerDataHolder dataHolder;
     [SerializeField] Transform target;
+    [SerializeField] GameObject bull;
     public bool smart;
     private void Start()
     {
         dataHolder = GetComponent<TowerDataHolder>();
         InvokeRepeating(nameof(CheckForTarget), 1, 1 / 15f);
+        StartCoroutine(Reload());
     }
     private void FixedUpdate()
     {
+        LookAtTarget();
+        
+    }
+    void LookAtTarget()
+    {
         if (target)
         {
-            if (smart)
-                transform.right = ;
-            else
-                transform.right = target.position - transform.position;
+                transform.right = (target.position + target.GetComponent<EnemyMovementComponent>().direction * target.GetComponent<EnemyDataHolder>().data.Speed *
+                    Vector3.Distance(target.position, transform.GetChild(0).position) *(smart? 1f : 0.5f) / dataHolder.data.BulletSpeed) - transform.position;
         }
-            
-        else
-            transform.right = Vector3.right;
     }
-
     void CheckForTarget()
     {
         Collider2D[] colls = Physics2D.OverlapCircleAll(transform.position, dataHolder.data.Range);
@@ -55,7 +56,27 @@ public class TowerAim : MonoBehaviour
                 list.Sort((x, y) => y.GetComponent<EnemyMovementComponent>().distance.CompareTo(x.GetComponent<EnemyMovementComponent>().distance));
                 target = list[0].transform;
                 break;
-        }        
+        }
+        LookAtTarget();
+    }
+
+    IEnumerator Reload()
+    {
+        while(true)
+        {
+            if (target != null)
+            {
+                Shoot();
+                yield return new WaitForSeconds(dataHolder.data.Reload);
+            }
+            else
+                yield return null;
+        }
+    }
+    void Shoot()
+    {
+        var bullet = Instantiate(bull,transform.GetChild(0).position,Quaternion.identity, transform).GetComponent<BulletController>();
+        bullet.Initialize(dataHolder.data.Damage, dataHolder.data.BulletSpeed, dataHolder.data.Shape,dataHolder.data.Color);
     }
 }
 

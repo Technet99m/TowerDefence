@@ -34,8 +34,10 @@ public class ColorConverter
                 return Color.green;
             case Colors.Red:
                 return Color.red;
-            default:
+            case Colors.Yellow:
                 return Color.yellow;
+            default:
+                return Color.white;
         }
     }
 }

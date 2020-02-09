@@ -6,7 +6,7 @@ public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] WaveData[] waves;
     [SerializeField] float timeBTweenWaves, timeBTweenEnemies;
-
+    [SerializeField] Sprite[] sprites;
     void Start()
     {
         StartCoroutine(Spawn());
@@ -20,6 +20,9 @@ public class EnemySpawner : MonoBehaviour
             {
                 GameObject enemy = EnemyPull.GetEnemy();
                 enemy.GetComponent<EnemyDataHolder>().data = waves[i].Enemies[j];
+                enemy.GetComponent<SpriteRenderer>().sprite = sprites[(int)waves[i].Enemies[j].Shape];
+                enemy.GetComponent<SpriteRenderer>().color = ColorConverter.ToColor(waves[i].Enemies[j].Color);
+                enemy.GetComponent<EnemyHealth>().SetHealth();
                 enemy.SetActive(true);
                 yield return new WaitForSeconds(timeBTweenEnemies);
             }

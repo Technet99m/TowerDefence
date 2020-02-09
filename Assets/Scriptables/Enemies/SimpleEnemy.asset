@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4eb5c29d1ee4f844acd372ed1ed17a4, type: 3}
   m_Name: SimpleEnemy
   m_EditorClassIdentifier: 
-  speed: 1
+  speed: 0.8
   health: 50
+  color: 3
+  shape: 2

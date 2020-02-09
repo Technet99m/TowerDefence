@@ -7,14 +7,11 @@ public class EnemyHealth : MonoBehaviour
     EnemyDataHolder dataHolder;
     public float health;
 
-    private void Start()
+    public void SetHealth()
     {
-        dataHolder = GetComponent<EnemyDataHolder>();
-    }
-    private void OnEnable()
-    {
-        if(dataHolder!=null)
-            health = dataHolder.data.Health;
+        if(dataHolder==null)
+            dataHolder = GetComponent<EnemyDataHolder>();
+        health = dataHolder.data.Health;
     }
     public void GetDamage(float damage)
     {
@@ -24,6 +21,6 @@ public class EnemyHealth : MonoBehaviour
     }
     void Die()
     {
-
+        gameObject.SetActive(false);
     }
 }

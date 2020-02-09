@@ -5,14 +5,16 @@ using UnityEngine;
 public class BulletController : MonoBehaviour
 {
     [SerializeField] Sprite[] sprites;
-    public Shapes shape;
-    public Colors color;
+    Shapes shape;
+    Colors color;
     float speed, damage;
     public Vector2 target;
-    public void Initialize(float Damage, float Speed)
+    public void Initialize(float Damage, float Speed,Shapes sh,Colors col)
     {
         speed = Speed;
         damage = Damage;
+        shape = sh;
+        color = col;
         var tmp = GetComponent<SpriteRenderer>();
         tmp.color = ColorConverter.ToColor(color);
         tmp.sprite = sprites[(int)shape];
@@ -33,6 +35,7 @@ public class BulletController : MonoBehaviour
             if (tmp.Color == color && tmp.Shape == shape)
             {
                 coll.GetComponent<EnemyHealth>().GetDamage(damage);
+                Destroy(gameObject);
             }
         }
     }

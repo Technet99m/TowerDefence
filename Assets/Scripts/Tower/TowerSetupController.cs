@@ -23,13 +23,16 @@ public class TowerSetupController : MonoBehaviour
             sr.color = Color.green;
         if(obstacleCount == 0 && Input.GetMouseButtonDown(0))
         {
-            sr.color = Color.white;
-            transform.GetChild(1).localScale = Vector3.zero;
-            GetComponent<TowerAim>().enabled = true;
-            this.enabled = false;
+            Set();
         }
     }
-
+    void Set()
+    {
+        sr.color = ColorConverter.ToColor(GetComponent<TowerDataHolder>().data.Color);
+        transform.GetChild(1).localScale = Vector3.zero;
+        GetComponent<TowerAim>().enabled = true;
+        this.enabled = false;
+    }
     private void OnTriggerEnter2D(Collider2D col)
     {
         if (col.CompareTag("Obstacle")) 
