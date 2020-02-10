@@ -35,6 +35,7 @@ public class EnemyMovementComponent : MonoBehaviour
         transform.position = Vector3.MoveTowards(transform.position, target, dataHolder.data.Speed * Time.deltaTime);
         diff = Vector3.Distance(tmp, transform.position);
         distance += diff;
+        transform.right = direction;
         if (diff < float.Epsilon)
         {
             target = EnemyPath.GetNextPoint(currentPoint);
