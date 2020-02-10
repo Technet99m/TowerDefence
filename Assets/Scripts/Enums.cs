@@ -17,7 +17,7 @@ public enum Targeting
 }
 public enum Colors
 {
-    White,
+    White = 0,
     Red,
     Green,
     Yellow,

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class WaveData 
+public class LevelData
 {
-    public EnemyData[] enemies;
+    public List<WaveData> waves;
 }

@@ -24,7 +24,7 @@ public class TowerAim : MonoBehaviour
     {
         if (target)
         {
-                transform.right = (target.position + target.GetComponent<EnemyMovementComponent>().direction * target.GetComponent<EnemyDataHolder>().data.Speed *
+                transform.right = (target.position + target.GetComponent<EnemyMovementComponent>().direction * target.GetComponent<EnemyDataHolder>().data.speed *
                     Vector3.Distance(target.position, transform.GetChild(0).position) *(smart? 1f : 0.5f) / data.BulletSpeed) - transform.position;
         }
     }
@@ -34,7 +34,7 @@ public class TowerAim : MonoBehaviour
         List<Collider2D> list = new List<Collider2D>();
         foreach (Collider2D col in colls)
         {
-            if(col.CompareTag("Enemy") && col.GetComponent<EnemyDataHolder>().data.Shape == data.Shape && col.GetComponent<EnemyDataHolder>().data.Color == data.Color)
+            if(col.CompareTag("Enemy") && col.GetComponent<EnemyDataHolder>().data.shape == data.Shape && col.GetComponent<EnemyDataHolder>().data.color == data.Color)
                 list.Add(col);
         }
         if (list.Count == 0)

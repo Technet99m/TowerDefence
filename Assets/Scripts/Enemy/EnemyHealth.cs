@@ -11,7 +11,7 @@ public class EnemyHealth : MonoBehaviour
     {
         if(dataHolder==null)
             dataHolder = GetComponent<EnemyDataHolder>();
-        health = dataHolder.data.Health;
+        health = dataHolder.data.health;
     }
     public void GetDamage(float damage)
     {

@@ -32,7 +32,7 @@ public class EnemyMovementComponent : MonoBehaviour
     {
         float diff;
         Vector3 tmp = transform.position;
-        transform.position = Vector3.MoveTowards(transform.position, target, dataHolder.data.Speed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, target, dataHolder.data.speed * Time.deltaTime);
         diff = Vector3.Distance(tmp, transform.position);
         distance += diff;
         transform.right = direction;
