@@ -11,4 +11,11 @@ public class EnemyData
     public float damage;
     public Colors color;
     public Shapes shape;
+
+    public bool Equals(EnemyData data)
+    {
+        if (speed == data.speed && health == data.health && money == data.money && damage == data.damage && color == data.color && shape == data.shape)
+            return true;
+        return false;
+    }
 }
