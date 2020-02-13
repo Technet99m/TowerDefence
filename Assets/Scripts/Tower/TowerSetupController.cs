@@ -31,7 +31,8 @@ public class TowerSetupController : MonoBehaviour
         sr.color = ColorConverter.ToColor(GetComponent<TowerData>().Color);
         transform.GetChild(1).localScale = Vector3.zero;
         GetComponent<TowerAim>().enabled = true;
-        this.enabled = false;
+        Camera.main.GetComponent<CameraController>().enabled = true;
+        enabled = false;
     }
     private void OnTriggerEnter2D(Collider2D col)
     {

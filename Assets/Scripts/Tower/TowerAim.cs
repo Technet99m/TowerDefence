@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class TowerAim : MonoBehaviour
 {
-    public Targeting aimType;
     TowerData data;
+    public Targeting aimType;
     [SerializeField] Transform target;
     [SerializeField] GameObject bull;
     public bool smart;
@@ -18,7 +18,6 @@ public class TowerAim : MonoBehaviour
     private void FixedUpdate()
     {
         LookAtTarget();
-        
     }
     void LookAtTarget()
     {
