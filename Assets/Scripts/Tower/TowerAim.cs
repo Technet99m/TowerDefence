@@ -33,7 +33,7 @@ public class TowerAim : MonoBehaviour
         List<Collider2D> list = new List<Collider2D>();
         foreach (Collider2D col in colls)
         {
-            if(col.CompareTag("Enemy") && col.GetComponent<EnemyDataHolder>().data.shape == data.Shape && col.GetComponent<EnemyDataHolder>().data.color == data.Color)
+            if(col.CompareTag("Enemy") && col.GetComponent<EnemyDataHolder>().data.shape == data.Shape)
                 list.Add(col);
         }
         if (list.Count == 0)

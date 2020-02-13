@@ -32,7 +32,7 @@ public class BulletController : MonoBehaviour
         if(coll.CompareTag("Enemy"))
         {
             EnemyData tmp = coll.GetComponent<EnemyDataHolder>().data;
-            if (tmp.color == color && tmp.shape == shape)
+            if ( tmp.shape == shape)
             {
                 coll.GetComponent<EnemyHealth>().GetDamage(damage);
                 Destroy(gameObject);
