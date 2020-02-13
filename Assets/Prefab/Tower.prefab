@@ -101,7 +101,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   range: 3
   damage: 5
-  reload: 3
+  reload: 2.5
   bulletSpeed: 5
   color: 0
   shape: 0
@@ -120,7 +120,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 1
+  m_Radius: 0.8
 --- !u!114 &6760737968305734245
 MonoBehaviour:
   m_ObjectHideFlags: 0
