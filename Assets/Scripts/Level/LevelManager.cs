@@ -4,16 +4,28 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
-    public static int wave;
-    public static int stage;
+    
+    public static LevelManager instance;
+
     [SerializeField] int minWaveSize;
 
-    void Start()
+    int wave, stage;
+
+    private void Start()
     {
+        instance = this;
         wave = 0;
         NextWave();
     }
-    void NextWave()
+    private void CheckStage()
+    {
+        if (wave == 10 || wave == 30 || wave == 70 || wave == 150)
+        {
+            stage++;
+            CameraController.instance.UpdateCameraBorders(stage);
+        }
+    }
+    public void NextWave()
     {
         wave++;
         CheckStage();
@@ -58,7 +70,7 @@ public class LevelManager : MonoBehaviour
                 {
                     if (i < waveSize / 3)
                         newWave.enemies[i] = new EnemyData() { health = 12, shape = Shapes.Circle, speed = 1.5f };
-                    else if(i< waveSize * 2/3f)
+                    else if (i < waveSize * 2 / 3f)
                         newWave.enemies[i] = new EnemyData() { health = 7, shape = Shapes.Triangle, speed = 1 };
                     else
                         newWave.enemies[i] = new EnemyData() { health = 10, shape = Shapes.Rectangle, speed = 1 };
@@ -75,7 +87,7 @@ public class LevelManager : MonoBehaviour
                 int maxSize = waveSize;
                 for (int i = 0; i < types; i++)
                 {
-                    if(i==types-1)
+                    if (i == types - 1)
                     {
                         counts[i] = maxSize;
                         break;
@@ -86,19 +98,19 @@ public class LevelManager : MonoBehaviour
                 }
                 print(types);
                 List<EnemyData> enemies = new List<EnemyData>();
-                for(int i = 0;i<types;i++)
+                for (int i = 0; i < types; i++)
                 {
                     EnemyData tmp = new EnemyData()
                     {
                         health = Random.value * wave / 10 + wave,
-                        speed = (2 + Random.value / 0.5f) + (Random.value > 0.5f+(1/(wave+1f)) ? 0.2f : -1),
+                        speed = (2 + Random.value / 0.5f) + (Random.value > 0.5f + (1 / (wave + 1f)) ? 0.2f : -1),
                         shape = (Shapes)Random.Range(0, 4)
                     };
                     print(tmp.speed);
                     enemies.Add(tmp);
                 }
                 enemies.Sort((x, y) => y.speed.CompareTo(x.speed));
-                for(int i = 0, k = 0;i<types;i++)
+                for (int i = 0, k = 0; i < types; i++)
                 {
                     for (int j = 0; j < counts[i]; j++, k++)
                         newWave.enemies[k] = enemies[i];
@@ -106,14 +118,6 @@ public class LevelManager : MonoBehaviour
                 break;
         }
         WaveManager.wave = newWave;
-    }
-
-    void CheckStage()
-    {
-        if (wave == 10 || wave == 30 || wave == 70 || wave == 150)
-        {
-            stage++;
-            CameraController.instance.UpdateCameraBorders(stage);
-        }
+        UIManager.instance.WaveEnded(wave);
     }
 }

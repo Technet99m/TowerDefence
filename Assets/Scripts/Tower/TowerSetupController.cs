@@ -21,16 +21,17 @@ public class TowerSetupController : MonoBehaviour
             sr.color = Color.red;
         else
             sr.color = Color.green;
-        if(obstacleCount == 0 && Input.GetMouseButtonDown(0))
+        if(obstacleCount == 0 && Input.GetMouseButtonUp(0))
         {
             Set();
         }
     }
     void Set()
     {
-        sr.color = ColorConverter.ToColor(GetComponent<TowerData>().Color);
         transform.GetChild(1).localScale = Vector3.zero;
         GetComponent<TowerAim>().enabled = true;
+        GetComponent<TowerUpgrade>().enabled = true;
+        GetComponent<SpriteRenderer>().color = Color.white;
         Camera.main.GetComponent<CameraController>().enabled = true;
         enabled = false;
     }

@@ -19,8 +19,12 @@ public class EnemyHealth : MonoBehaviour
         if (health <= 0)
             Die();
     }
-    void Die()
+    private void Die()
     {
+        WaveManager.EnemyKill();
+        SetHealth();
+        Debug.Log("Died " + gameObject.name);
         gameObject.SetActive(false);
+        PlayerMoney.instance.ChangeMoney(1f);
     }
 }

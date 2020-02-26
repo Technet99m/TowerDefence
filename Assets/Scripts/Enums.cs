@@ -15,32 +15,26 @@ public enum Targeting
     Strongest,
     Nearest
 }
-public enum Colors
+public enum EffectType
 {
-    White = 0,
-    Red,
-    Green,
-    Yellow,
-    Blue,
-    Black
+    No = 0,
+    Poison,
+    Freeze,
+    Lightning,
 }
 
 public class ColorConverter
 {
-    public static Color ToColor(Colors s)
+    public static Color ToColor(EffectType ef)
     {
-        switch (s)
+        switch (ef)
         {
-            case Colors.Black:
-                return Color.black;
-            case Colors.Blue:
-                return Color.blue;
-            case Colors.Green:
-                return Color.green;
-            case Colors.Red:
-                return Color.red;
-            case Colors.Yellow:
+            case EffectType.Lightning:
                 return Color.yellow;
+            case EffectType.Freeze:
+                return Color.blue;
+            case EffectType.Poison:
+                return Color.green;
             default:
                 return Color.white;
         }

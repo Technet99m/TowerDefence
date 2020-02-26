@@ -10,6 +10,21 @@ public class WaveManager : MonoBehaviour
     [SerializeField] Sprite[] sprites;
 
     public static int waveSize;
+    public static void EnemyKill()
+    {
+        waveSize--;
+        if (waveSize == 0)
+            EndWave();
+    }
+    public static void EndWave()
+    {
+        LevelManager.instance.NextWave();
+    }
+    public void StartWave()
+    {
+        waveSize = wave.enemies.Length;
+        StartCoroutine(SpawnWave());
+    }
     IEnumerator SpawnWave()
     {
         for (int i = 0; i < wave.enemies.Length; i++)
@@ -21,14 +36,5 @@ public class WaveManager : MonoBehaviour
             enemy.SetActive(true);
             yield return new WaitForSeconds(timeBTweenEnemies);
         }
-    }
-
-    public void StartWave()
-    {
-        StartCoroutine(SpawnWave());
-    }
-    void EndWave()
-    {
-
     }
 }

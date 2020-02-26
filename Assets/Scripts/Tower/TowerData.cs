@@ -4,14 +4,21 @@ using UnityEngine;
 
 public class TowerData : MonoBehaviour
 {
-    [SerializeField ]float range, damage, reload, bulletSpeed;
-    [SerializeField] Colors color;
-    [SerializeField]  Shapes shape;
-    public float Range { get { return range; } }
-    public float Damage { get { return damage; } }
-    public float Reload { get { return reload; } }
-    public float BulletSpeed { get { return bulletSpeed; } }
-    public Colors Color { get { return color; } }
-    public Shapes Shape { get { return shape; } set { shape = value; } }
+    public float Range, Damage, Reload, BulletSpeed;
+    public Effect Effect;
+    public Shapes Shape;
+    public bool smart;
 
+    /*private void OnEnable()
+    {
+        Effect = new Effect();
+        Effect.type = 0;
+    }*/
 }
+[System.Serializable]
+public class Effect
+{
+    public EffectType type;
+    public int stage;
+}
+

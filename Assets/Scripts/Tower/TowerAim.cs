@@ -8,7 +8,7 @@ public class TowerAim : MonoBehaviour
     public Targeting aimType;
     [SerializeField] Transform target;
     [SerializeField] GameObject bull;
-    public bool smart;
+
     private void Start()
     {
         data = GetComponent<TowerData>();
@@ -24,7 +24,7 @@ public class TowerAim : MonoBehaviour
         if (target)
         {
                 transform.right = (target.position + target.GetComponent<EnemyMovementComponent>().direction * target.GetComponent<EnemyDataHolder>().data.speed *
-                    Vector3.Distance(target.position, transform.GetChild(0).position) *(smart? 1f : 0.5f) / data.BulletSpeed) - transform.position;
+                    Vector3.Distance(target.position, transform.GetChild(0).position) *(data.smart? 1f : 0.5f) / data.BulletSpeed) - transform.position;
         }
     }
     void CheckForTarget()
@@ -75,7 +75,7 @@ public class TowerAim : MonoBehaviour
     void Shoot()
     {
         var bullet = Instantiate(bull,transform.GetChild(0).position,Quaternion.identity, transform).GetComponent<BulletController>();
-        bullet.Initialize(data.Damage, data.BulletSpeed, data.Shape,data.Color);
+        bullet.Initialize(data.Damage, data.BulletSpeed, data.Shape,data.Effect);
     }
 }
 
