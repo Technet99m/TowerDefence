@@ -19,6 +19,6 @@ public class UpgradeButtonController : MonoBehaviour
     public void ButtonPressed()
     {
         UpgradePanelController.instance.current.Upgrade(index);
-        UpgradePanelController.instance.ButtonsSetUp();
+        UpgradePanelController.instance.SetUpButtons();
     }
 }

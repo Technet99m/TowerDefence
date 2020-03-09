@@ -9,10 +9,12 @@ public class EnemyEffectsDealer : MonoBehaviour
     [SerializeField] float lightningRadius,lightningDamage, poisonDamage;
     [SerializeField] LayerMask lightningMask;
     [SerializeField] GameObject lightningLine;
-    public bool isLightend;
+    public bool isLightend,isFreezed,isPoisoned;
 
     float startSpeed;
     Coroutine lightning, poison,freeze;
+
+    
     public void Start()
     {
         startSpeed = dataHolder.data.speed;
@@ -37,17 +39,18 @@ public class EnemyEffectsDealer : MonoBehaviour
 
         }
     }
+    #region Lightning
     public void LightningStrike()
     {
-        GetComponent<SpriteRenderer>().color = ColorConverter.ToColor(EffectType.Lightning);
         HP.GetDamage(lightningDamage);
         isLightend = true;
+        SetUpColor();
         Invoke(nameof(Unstrike), 0.3f);
     }
     void Unstrike()
     {
-        GetComponent<SpriteRenderer>().color = Color.black;
         isLightend = false;
+        SetUpColor();
     }
     public EnemyEffectsDealer FindNearestNotStriked()
     {
@@ -70,6 +73,7 @@ public class EnemyEffectsDealer : MonoBehaviour
     }
     IEnumerator Lightning(int stage)
     {
+
         var line = Instantiate(lightningLine).GetComponent<LineRenderer>();
         Destroy(line.gameObject, 1/8f* (2 + stage));
         EnemyEffectsDealer target = this;
@@ -93,24 +97,41 @@ public class EnemyEffectsDealer : MonoBehaviour
         if(line)
             Destroy(line.gameObject);
     }
+    #endregion
     IEnumerator Poison(int stage)
     {
+        isPoisoned = true;
         float endTime = Time.time + stage * 1f;
         var wait = new WaitForSeconds(1 / 5f);
-        GetComponent<SpriteRenderer>().color = ColorConverter.ToColor(EffectType.Poison);
+        SetUpColor();
         while (Time.time< endTime)
         {
             HP.GetDamage(0.1f);
             yield return wait;
         }
-        GetComponent<SpriteRenderer>().color = Color.black;
+        isPoisoned = false;
+        SetUpColor();
     }
     IEnumerator Freeze(int stage)
     {
-        GetComponent<SpriteRenderer>().color = ColorConverter.ToColor(EffectType.Freeze);
+        isFreezed = true;
+        SetUpColor();
         dataHolder.data.speed = startSpeed / 3f;
         yield return new WaitForSeconds(stage * 1f);
         dataHolder.data.speed = startSpeed;
-        GetComponent<SpriteRenderer>().color = Color.black;
+        isFreezed = false;
+        SetUpColor();
+    }
+    void SetUpColor()
+    {
+        var sp = GetComponent<SpriteRenderer>();
+        if (isLightend)
+            sp.color = ColorConverter.ToColor(EffectType.Lightning);
+        else if (isPoisoned)
+            sp.color = ColorConverter.ToColor(EffectType.Poison);
+        else if (isFreezed)
+            sp.color = ColorConverter.ToColor(EffectType.Freeze);
+        else
+            sp.color = Color.black;
     }
 }

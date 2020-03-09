@@ -26,6 +26,7 @@ public class EnemyMovementComponent : MonoBehaviour
         transform.position = EnemyPath.GetFirstPoint();
         target = EnemyPath.GetNextPoint(0);
         currentPoint = 1;
+        GetComponent<SpriteRenderer>().color = Color.black;
     }
 
     private void Update()

@@ -12,9 +12,20 @@ public class TowerUpgrade : MonoBehaviour
     public int[] maxStages;
     public float[] prices;
 
+    bool interactable;
+    private void OnEnable()
+    {
+        interactable = false;
+        Invoke(nameof(Activate), Time.deltaTime);
+    }
+    void Activate()
+    {
+        interactable = true;
+    }
     private void OnMouseUpAsButton()
     {
-        UpgradePanelController.instance.SetUp(this);
+        if(interactable)
+            UpgradePanelController.instance.SetUp(this);
     }
     private void Start()
     {

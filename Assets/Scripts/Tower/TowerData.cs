@@ -9,11 +9,11 @@ public class TowerData : MonoBehaviour
     public Shapes Shape;
     public bool smart;
 
-    /*private void OnEnable()
+    public void SetNewEffect(EffectType type)
     {
-        Effect = new Effect();
-        Effect.type = 0;
-    }*/
+        Effect = new Effect() { type = type, stage = 1 };
+        GetComponent<SpriteRenderer>().color = ColorConverter.ToColor(type);
+    }
 }
 [System.Serializable]
 public class Effect
