@@ -33,23 +33,25 @@ public class TowerUpgrade : MonoBehaviour
     }
     public void Upgrade(int index)
     {
-        Stages[index]++;
-        switch(index)
+        if (PlayerMoney.instance.TryBuyForPrice(prices[index]))
         {
-            case 0:
-                data.Reload *= Updates[index];
-                break;
-            case 1:
-                data.Damage *= Updates[index];
-                break;
-            case 2:
-                data.Range *= Updates[index];
-                break;
-            case 3:
-                data.BulletSpeed *= Updates[index];
-                break;
+            Stages[index]++;
+            switch (index)
+            {
+                case 0:
+                    data.Reload *= Updates[index];
+                    break;
+                case 1:
+                    data.Damage *= Updates[index];
+                    break;
+                case 2:
+                    data.Range *= Updates[index];
+                    break;
+                case 3:
+                    data.BulletSpeed *= Updates[index];
+                    break;
+            }
+            prices[index] *= costIncrease;
         }
-        PlayerMoney.instance.ChangeMoney(-prices[index]);
-        prices[index] *= costIncrease;
     }
 }

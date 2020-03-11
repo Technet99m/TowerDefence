@@ -6,19 +6,39 @@ using UnityEngine.UI;
 public class PlayerMoney : MonoBehaviour
 {
     public static PlayerMoney instance;
-    public float Money;
+    [SerializeField] float Money;
+    public float TowerPrice, ColorPrice, ColorUpdatePrice;
 
     [SerializeField] Text text;
 
     private void Awake()
     {
         instance = this;
-        Money = 0;
-        ChangeMoney(0);
+        RefreshText();
     }
-    public void ChangeMoney(float change)
+    void RefreshText()
     {
-        Money += change;
         text.text = Money.ToString("N2");
+    }
+    public void AddMoney(float change)
+    {
+        if (change < 0)
+            return;
+        Money += change;
+        RefreshText();
+    }
+    public bool TryBuyForPrice(float price)
+    {
+        if (price < 0)
+            return false;
+        
+        if (Money >= price)
+        {
+            Money -= price;
+            RefreshText();
+            return true;
+        }
+        // Activate Not enough money panel
+        return false;
     }
 }

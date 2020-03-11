@@ -8,10 +8,13 @@ public class BuyTower : MonoBehaviour
     [SerializeField] Sprite[] sprites;
     public void Buy(int s)
     {
-        var Tower = Instantiate(tower);
-        Tower.GetComponent<TowerData>().Shape = (Shapes)s;
-        Tower.GetComponent<SpriteRenderer>().sprite = sprites[s];
-        GetComponent<DropAnimator>().Hide();
+        if (PlayerMoney.instance.TryBuyForPrice(PlayerMoney.instance.TowerPrice))
+        {
+            var Tower = Instantiate(tower);
+            Tower.GetComponent<TowerData>().Shape = (Shapes)s;
+            Tower.GetComponent<SpriteRenderer>().sprite = sprites[s];
+            GetComponent<DropAnimator>().Hide();
+        }
     }
     
 }

@@ -10,7 +10,6 @@ public class UpgradePanelController : MonoBehaviour
     [SerializeField] UpgradeButtonController[] buttons;
     [SerializeField] Image preview;
     [SerializeField] Button[] colors;
-
     public TowerUpgrade current;
 
     private void Awake()
@@ -48,7 +47,17 @@ public class UpgradePanelController : MonoBehaviour
     }
     public void SetColorTo(int i)
     {
-        current.data.SetNewEffect((EffectType)(i + 1));
-        preview.color = ColorConverter.ToColor(current.data.Effect.type);
+        if (PlayerMoney.instance.TryBuyForPrice(PlayerMoney.instance.ColorPrice))
+        {
+            current.data.SetNewEffect((EffectType)(i + 1));
+            preview.color = ColorConverter.ToColor(current.data.Effect.type);
+        }
+    }
+    public void UpgradeColor()
+    {
+        if(PlayerMoney.instance.TryBuyForPrice(PlayerMoney.instance.ColorUpdatePrice))
+        {
+            current.data.Effect.stage++;
+        }
     }
 }

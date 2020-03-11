@@ -25,6 +25,11 @@ public class TowerSetupController : MonoBehaviour
         {
             Set();
         }
+        if(Input.GetMouseButtonUp(1))
+        {
+            PlayerMoney.instance.AddMoney(PlayerMoney.instance.TowerPrice);
+            Destroy(gameObject);
+        }
     }
     void Set()
     {
