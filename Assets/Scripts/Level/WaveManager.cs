@@ -32,6 +32,7 @@ public class WaveManager : MonoBehaviour
             GameObject enemy = EnemyPull.GetEnemy();
             enemy.GetComponent<EnemyDataHolder>().data = wave.enemies[i];
             enemy.GetComponent<SpriteRenderer>().sprite = sprites[(int)wave.enemies[i].shape];
+            enemy.GetComponent<SpriteRenderer>().color = ColorConverter.black;
             enemy.GetComponent<EnemyHealth>().SetHealth();
             enemy.SetActive(true);
             yield return new WaitForSeconds(timeBTweenEnemies);

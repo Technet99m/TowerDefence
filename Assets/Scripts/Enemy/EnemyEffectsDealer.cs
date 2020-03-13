@@ -132,6 +132,6 @@ public class EnemyEffectsDealer : MonoBehaviour
         else if (isFreezed)
             sp.color = ColorConverter.ToColor(EffectType.Freeze);
         else
-            sp.color = Color.black;
+            sp.color = ColorConverter.black;
     }
 }

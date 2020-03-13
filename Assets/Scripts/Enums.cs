@@ -30,13 +30,14 @@ public class ColorConverter
         switch (ef)
         {
             case EffectType.Lightning:
-                return Color.yellow;
+                return new Color32(255, 218, 0, 255);
             case EffectType.Freeze:
-                return Color.blue;
+                return new Color32(77, 191, 255, 255);
             case EffectType.Poison:
-                return Color.green;
+                return new Color32(29, 255, 180, 255); ;
             default:
                 return Color.white;
         }
     }
+    public static Color black = new Color32(31, 31, 56, 255);
 }
