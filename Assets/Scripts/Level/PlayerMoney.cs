@@ -9,7 +9,7 @@ public class PlayerMoney : MonoBehaviour
     [SerializeField] float Money;
     public float TowerPrice, ColorPrice, ColorUpdatePrice;
 
-    [SerializeField] Text text;
+    [SerializeField] CounterFitter counter;
 
     private void Awake()
     {
@@ -18,7 +18,7 @@ public class PlayerMoney : MonoBehaviour
     }
     void RefreshText()
     {
-        text.text = Money.ToString("N2");
+        counter.SetCounterTo(Money, 1);
     }
     public void AddMoney(float change)
     {

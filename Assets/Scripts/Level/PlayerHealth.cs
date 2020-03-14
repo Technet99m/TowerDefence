@@ -6,9 +6,9 @@ using UnityEngine.UI;
 public class PlayerHealth : MonoBehaviour
 {
     public static PlayerHealth instance;
-    int Health;
+    [SerializeField]int Health;
 
-    [SerializeField] Text text;
+    [SerializeField] CounterFitter counter;
 
     private void Awake()
     {
@@ -19,6 +19,6 @@ public class PlayerHealth : MonoBehaviour
     public void MinusHealth()
     {
         Health--;
-        text.text = Health.ToString();
+        counter.SetCounterTo(Health);
     }
 }
