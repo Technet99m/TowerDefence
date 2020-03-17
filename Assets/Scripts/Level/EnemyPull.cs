@@ -28,4 +28,10 @@ public class EnemyPull : MonoBehaviour
         index = (index + 1) % size;
         return tmp;
     }
+    public static void Refresh()
+    {
+        foreach (var g in pull)
+            g.SetActive(false);
+        index = 0;
+    }
 }

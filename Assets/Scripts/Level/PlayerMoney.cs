@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,6 +16,12 @@ public class PlayerMoney : MonoBehaviour
     {
         instance = this;
         RefreshText();
+        WaveManager.EnemyKilled += OnEnemyDied;
+    }
+
+    void OnEnemyDied(object sender, EventArgs e)
+    {
+        AddMoney(1f);
     }
     void RefreshText()
     {

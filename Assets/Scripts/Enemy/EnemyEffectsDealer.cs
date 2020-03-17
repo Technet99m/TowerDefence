@@ -80,7 +80,7 @@ public class EnemyEffectsDealer : MonoBehaviour
         for(int i = 0;i<2+stage;i++)
         {
             target = target.FindNearestNotStriked();
-            if(target)
+            if(target && line != null)
             {
                 target.LightningStrike();
                 line.positionCount++;
@@ -101,12 +101,13 @@ public class EnemyEffectsDealer : MonoBehaviour
     IEnumerator Poison(int stage)
     {
         isPoisoned = true;
-        float endTime = Time.time + stage * 1f;
+        float endTime = Time.time + stage * 1.25f;
         var wait = new WaitForSeconds(1 / 5f);
         SetUpColor();
         while (Time.time< endTime)
         {
-            HP.GetDamage(0.1f);
+            HP.GetDamage(poisonDamage);
+            Debug.Log(HP.health);
             yield return wait;
         }
         isPoisoned = false;
