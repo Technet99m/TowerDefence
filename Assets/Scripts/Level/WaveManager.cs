@@ -34,6 +34,7 @@ public class WaveManager : MonoBehaviour
             enemy.GetComponent<SpriteRenderer>().sprite = sprites[(int)wave.enemies[i].shape];
             enemy.GetComponent<EnemyHealth>().SetHealth();
             enemy.SetActive(true);
+            enemy.GetComponent<SpriteRenderer>().color = ColorConverter.black;
             yield return new WaitForSeconds(timeBTweenEnemies);
         }
     }

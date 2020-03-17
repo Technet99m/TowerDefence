@@ -47,6 +47,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -79,7 +80,7 @@ SpriteRenderer:
   m_Size: {x: 0.365, y: 0.365}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &2203979464101203992
@@ -95,10 +96,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sprites:
-  - {fileID: 21300000, guid: 781e80cde9831404389f119940fcf03e, type: 3}
-  - {fileID: 21300000, guid: b77d509abd99c124785b4809a1d39c98, type: 3}
-  - {fileID: 21300000, guid: 541183bb617d60945adae3687910e651, type: 3}
-  - {fileID: 21300000, guid: c2ab8d87d6606a24a895d7b68e792469, type: 3}
+  - {fileID: 21300000, guid: 2f13a62a141aa6c4cac0eb6a6e18e7c3, type: 3}
+  - {fileID: 21300000, guid: fc5aae46365afba438b17d4f8f0fdfdb, type: 3}
+  - {fileID: 21300000, guid: f3e03b35ab020e647b893336450527dc, type: 3}
+  - {fileID: 21300000, guid: 6a8905219f4a4094d99804400f1cfbc2, type: 3}
   target: {x: 0, y: 0}
 --- !u!58 &2203979464101203995
 CircleCollider2D:

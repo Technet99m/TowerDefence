@@ -52,6 +52,7 @@ public class TowerUpgrade : MonoBehaviour
                     break;
             }
             prices[index] *= costIncrease;
+            prices[index] = Mathf.Round(prices[index] * 10) / 10;
         }
     }
 }

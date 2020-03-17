@@ -25,9 +25,7 @@ public class EnemyPull : MonoBehaviour
     public static GameObject GetEnemy()
     {
         var tmp = pull[index];
-        index++;
-        if (index == size)
-            index = 0;
+        index = (index + 1) % size;
         return tmp;
     }
 }
