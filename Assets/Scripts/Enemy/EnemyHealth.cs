@@ -25,6 +25,5 @@ public class EnemyHealth : MonoBehaviour
         SetHealth();
         Debug.Log("Died " + gameObject.name);
         gameObject.SetActive(false);
-        PlayerMoney.instance.AddMoney(1f);
     }
 }

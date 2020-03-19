@@ -8,7 +8,11 @@ public class LevelManager : MonoBehaviour
     public static LevelManager instance;
 
     [SerializeField] int minWaveSize;
-
+    [SerializeField] Sprite[] roads;
+    [SerializeField] SpriteRenderer road;
+    [SerializeField] Transform Base;
+    [SerializeField] Vector3[] basePositions;
+    
     int wave, stage;
 
     private void Start()
@@ -22,7 +26,8 @@ public class LevelManager : MonoBehaviour
         if (wave == 10 || wave == 30 || wave == 70 || wave == 150)
         {
             stage++;
-            CameraController.instance.UpdateCameraBorders(stage);
+            road.sprite = roads[stage];
+            Base.position = basePositions[stage];
         }
     }
     public void NextWave()

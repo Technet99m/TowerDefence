@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,10 +9,11 @@ public class WaveManager : MonoBehaviour
     
     [SerializeField] float timeBTweenEnemies;
     [SerializeField] Sprite[] sprites;
-
+    public static event EventHandler EnemyKilled;
     public static int waveSize;
     public static void EnemyKill()
     {
+        EnemyKilled?.Invoke(null, EventArgs.Empty);
         waveSize--;
         if (waveSize == 0)
             EndWave();
