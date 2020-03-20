@@ -14,15 +14,21 @@ public class DropAnimator : MonoBehaviour
     }
     public void Show()
     {
-        GetComponent<Animator>().Play("Enable");
-        isShowing = true;
-        GetComponent<Image>().sprite = pressed;
+        if (!isShowing)
+        {
+            GetComponent<Animator>().Play("Enable");
+            isShowing = true;
+            GetComponent<Image>().sprite = pressed;
+        }
     }
 
     public void Hide()
     {
-        GetComponent<Animator>().Play("Disable");
-        isShowing = false;
-        GetComponent<Image>().sprite = normal;
+        if (isShowing)
+        {
+            GetComponent<Animator>().Play("Disable");
+            isShowing = false;
+            GetComponent<Image>().sprite = normal;
+        }
     }
 }

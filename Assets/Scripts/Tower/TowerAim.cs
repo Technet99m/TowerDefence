@@ -12,7 +12,7 @@ public class TowerAim : MonoBehaviour
     private void Start()
     {
         data = GetComponent<TowerData>();
-        InvokeRepeating(nameof(CheckForTarget), 1, 1 / 15f);
+        InvokeRepeating(nameof(CheckForTarget), 1, 1 / 10f);
         StartCoroutine(Reload());
     }
     private void FixedUpdate()
@@ -44,11 +44,11 @@ public class TowerAim : MonoBehaviour
         switch (aimType)
         {
             case Targeting.Weakest:
-                list.Sort((x, y) => x.GetComponent<EnemyHealth>().health.CompareTo(y.GetComponent<EnemyHealth>().health));
+                list.Sort((x, y) => x.GetComponent<EnemyHealth>().CompareTo(y.GetComponent<EnemyHealth>()));
                 target = list[0].transform;
                 break;
             case Targeting.Strongest:
-                list.Sort((x, y) => y.GetComponent<EnemyHealth>().health.CompareTo(x.GetComponent<EnemyHealth>().health));
+                list.Sort((x, y) => y.GetComponent<EnemyHealth>().CompareTo(x.GetComponent<EnemyHealth>()));
                 target = list[0].transform;
                 break;
             case Targeting.Nearest:

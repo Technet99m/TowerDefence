@@ -26,4 +26,11 @@ public class EnemyHealth : MonoBehaviour
         Debug.Log("Died " + gameObject.name);
         gameObject.SetActive(false);
     }
+    public int CompareTo(EnemyHealth y)
+    {
+        if (y.health != health)
+            return health.CompareTo(y.health);
+        else
+            return GetComponent<EnemyMovementComponent>().distance.CompareTo(y.GetComponent<EnemyMovementComponent>().distance);
+    }
 }

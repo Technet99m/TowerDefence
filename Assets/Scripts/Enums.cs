@@ -40,4 +40,6 @@ public class ColorConverter
         }
     }
     public static Color black = new Color32(31, 31, 56, 255);
+    public static Color allow = new Color32(31, 255, 31, 255);
+    public static Color forbid = new Color32(255, 31, 31, 255);
 }

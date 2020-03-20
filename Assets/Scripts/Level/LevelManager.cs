@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour
 {
@@ -12,8 +13,26 @@ public class LevelManager : MonoBehaviour
     [SerializeField] SpriteRenderer road;
     [SerializeField] Transform Base;
     [SerializeField] Vector3[] basePositions;
+    [SerializeField] Text[] memberCounts;
     
     int wave, stage;
+    public int Wave
+    {
+        get { return wave; }
+        set
+        {
+            wave = value;
+            if (wave > 10)
+                stage++;
+            if (wave > 30)
+                stage++;
+            if (wave > 70)
+                stage++;
+            CheckStage();
+            CountAll();
+            UIManager.instance.WaveEnded(wave);
+        }
+    }
 
     private void Start()
     {
@@ -23,7 +42,7 @@ public class LevelManager : MonoBehaviour
     }
     private void CheckStage()
     {
-        if (wave == 10 || wave == 30 || wave == 70 || wave == 150)
+        if (wave == 10 || wave == 30 || wave == 70)
         {
             stage++;
             road.sprite = roads[stage];
@@ -123,6 +142,20 @@ public class LevelManager : MonoBehaviour
                 break;
         }
         WaveManager.wave = newWave;
+        CountAll();
         UIManager.instance.WaveEnded(wave);
+    }
+    void CountAll()
+    {
+        for(int i = 0;i<4;i++)
+        {
+            int count = 0;
+            foreach(var enemy in WaveManager.wave.enemies)
+            {
+                if (enemy.shape == (Shapes)i)
+                    count++;
+            }
+            memberCounts[i].text = $"x{count}";
+        }
     }
 }

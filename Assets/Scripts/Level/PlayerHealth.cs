@@ -6,19 +6,28 @@ using UnityEngine.UI;
 public class PlayerHealth : MonoBehaviour
 {
     public static PlayerHealth instance;
-    [SerializeField]int Health;
+    [SerializeField]int health;
+    public int Health 
+    {
+        get { return health; }
+        set 
+        {
+            health = value;
+            counter.SetCounterTo(value);
+        }
+    }
 
     [SerializeField] CounterFitter counter;
 
     private void Awake()
     {
         instance = this;
-        Health = 101;
+        health = 101;
         MinusHealth();
     }
     public void MinusHealth()
     {
-        Health--;
-        counter.SetCounterTo(Health);
+        health--;
+        counter.SetCounterTo(health);
     }
 }

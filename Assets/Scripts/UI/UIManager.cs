@@ -7,8 +7,7 @@ public class UIManager : MonoBehaviour
 {
     [SerializeField] Button startWave;
     [SerializeField] Text waveNumber;
-    [SerializeField] GameObject dropdown;
-
+    [SerializeField] GameObject dropdown, gameSpeed;
     public static UIManager instance;
     private void Awake()
     {
@@ -21,11 +20,13 @@ public class UIManager : MonoBehaviour
         waveNumber.text = "Wave "+ nextWave.ToString();
         waveNumber.color = Color.black;
         dropdown.SetActive(true);
+        gameSpeed.SetActive(false);
     }
     public void WaveStarted()
     {
         startWave.interactable = false;
         waveNumber.color = Color.white;
         dropdown.SetActive(false);
+        gameSpeed.SetActive(true);
     }
 }

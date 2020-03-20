@@ -7,8 +7,17 @@ using UnityEngine.UI;
 public class PlayerMoney : MonoBehaviour
 {
     public static PlayerMoney instance;
-    [SerializeField] float Money;
-    public float TowerPrice, ColorPrice, ColorUpdatePrice;
+    [SerializeField] float money;
+    public float Money
+    { 
+        get { return money; }
+        set
+        { 
+            money = value;
+            RefreshText();
+        }
+    }
+    public float TowerPrice, ColorPrice, SmartPrice;
 
     [SerializeField] CounterFitter counter;
 
@@ -47,5 +56,9 @@ public class PlayerMoney : MonoBehaviour
         }
         // Activate Not enough money panel
         return false;
+    }
+    public bool isEnough(float price)
+    {
+        return Money >= price;
     }
 }

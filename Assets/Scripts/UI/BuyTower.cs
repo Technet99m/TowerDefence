@@ -15,6 +15,8 @@ public class BuyTower : MonoBehaviour
             Tower.GetComponent<SpriteRenderer>().sprite = sprites[s];
             GetComponent<DropAnimator>().Hide();
         }
+        else
+            NotEnoughMoneyController.instance.Show();
     }
     
 }

@@ -4,42 +4,39 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    public static CameraController instance;
-
-    public Vector2[] bottomBorders;
 
     [SerializeField] Vector2 topBorder, BottomBorder;
-    [SerializeField] float sensivity;
+    [SerializeField] float zoomSensivity, swipeSensivity;
 
     Vector2 offset;
     float distance;
-    float minSize, maxSize;
-
+    [SerializeField]float minSize, maxSize;
+    Camera cam;
 
     private void Start()
     {
-        minSize = 5;
+        cam = GetComponent<Camera>();
         UpdateOffset();
-        UpdateCameraBorders(0);
     }
     void Update()
     {
         if (Input.touchCount == 1 && Input.touches[0].phase == TouchPhase.Moved)
         {
-            transform.Translate(ScreenToWorld(Input.touches[0].deltaPosition) * -1);
+            transform.Translate(ScreenToWorld(Input.touches[0].deltaPosition) * -1 * swipeSensivity);
             transform.position = new Vector3(Mathf.Clamp(transform.position.x, topBorder.x + offset.x, BottomBorder.x - offset.x),
                 Mathf.Clamp(transform.position.y, BottomBorder.y + offset.y, topBorder.y - offset.y), transform.position.z);
         }
         if (Input.touchCount == 2)
         {
             if (Input.touches[0].phase == TouchPhase.Began || Input.touches[1].phase == TouchPhase.Began)
-                distance = Vector2.Distance(ScreenToWorld(Input.touches[0].position), ScreenToWorld(Input.touches[1].position));
+                distance = Vector2.Distance(Input.touches[0].position, Input.touches[1].position);
             else
             {
-                float newDistance = Vector2.Distance(ScreenToWorld(Input.touches[0].position), ScreenToWorld(Input.touches[1].position));
-                Camera.main.orthographicSize -= (newDistance - distance) * sensivity;
-                Camera.main.orthographicSize = Mathf.Clamp(Camera.main.orthographicSize, minSize, maxSize);
+                float newDistance = Vector2.Distance(Input.touches[0].position, Input.touches[1].position);
+                cam.orthographicSize -= (newDistance - distance) * zoomSensivity;
+                cam.orthographicSize = Mathf.Clamp(cam.orthographicSize, minSize, maxSize);
                 distance = newDistance;
+                Debug.Log($"{distance} count:{Input.touchCount}");
                 UpdateOffset();
                 transform.position = new Vector3(Mathf.Clamp(transform.position.x, topBorder.x + offset.x, BottomBorder.x - offset.x),
                 Mathf.Clamp(transform.position.y, BottomBorder.y + offset.y, topBorder.y - offset.y), transform.position.z);
@@ -48,12 +45,7 @@ public class CameraController : MonoBehaviour
     }
     public void UpdateOffset()
     {
-        offset = Camera.main.ViewportToWorldPoint(new Vector3(1, 1)) - Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.5f));
-    }
-    public void UpdateCameraBorders(int stage)
-    {
-        BottomBorder = bottomBorders[stage];
-        maxSize = 5 + 2 * stage;
+        offset = cam.ViewportToWorldPoint(new Vector3(1, 1)) - Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.5f));
     }
     public Vector2 ScreenToWorld(Vector2 v)
     {
